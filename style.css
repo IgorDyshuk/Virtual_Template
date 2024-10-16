@@ -1,0 +1,330 @@
+.font-regular {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+.font-normal {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.font-bold {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями
+ */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+}
+
+/**
+  Плавный скролл
+ */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+ */
+svg *[fill] {
+  fill: currentColor;
+}
+svg *[stroke] {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root {
+  --color-dark-blue: #111827;
+  --color-gradient: linear-gradient(166.77deg, #2f79cb -29%, #af51c5 141.21%);
+  --color-light-white: #f9fafb;
+  --color-white: #ffffff;
+
+  --font-family: "DM Sans", sans-serif;
+
+  --button-border-radius: 0.3125rem;
+  --card-border-radius: 2.125rem;
+
+  --container-width: 73.125rem;
+  --container-padding-x: 0.375rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.button {
+  background: linear-gradient(90.35deg, #2563eb 0.36%, #d946ef 201.02%);
+  color: inherit;
+  border-radius: var(--button-border-radius);
+  border: none;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-dark-blue);
+  overflow-x: hidden;
+}
+
+.container {
+  margin: 40px 0;
+  max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
+  padding: 0 3.75rem;
+  margin-inline: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  column-gap: 3.75rem;
+  white-space: nowrap;
+}
+
+.header > *:not(:first-child) {
+  margin-left: auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo p {
+  margin-left: 10px;
+  font-size: 20px;
+  color: var(--color-white);
+}
+
+.icon {
+  width: 34.25px;
+  height: 34.25px;
+}
+
+.nav-menu-list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: var(--color-light-white);
+  font-size: 0.875rem;
+  column-gap: 3.75rem;
+}
+
+.header-button {
+  padding: 0.75rem 1.5rem;
+}
+
+/* Blur */
+.blur {
+  position: absolute;
+  width: 98.4375rem; /* 1575px */
+  height: 18.845rem; /* 301.52px */
+  left: -3.6875rem; /* -59px */
+  top: 8.8744rem; /* 141.99px */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.05
+  ); /* Добавлен светлый полупрозрачный фон */
+  filter: blur(6.25rem); /* 100px */
+  /* overflow-x: hidden; */
+}
+
+/* Общие стили для всех эллипсов */
+.ellipse {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(
+    9.375rem
+  ); /* Увеличено размытие для более мягкого эффекта (150px) */
+}
+
+/* Ellipse 23 */
+.ellipse-23 {
+  width: 8.8125rem; /* 141px */
+  height: 8.875rem; /* 142px */
+  left: 74.6875rem; /* 1195px */
+  top: 10.3125rem; /* 165px */
+  background: #2563eb; /* Насыщенный синий */
+  filter: blur(9.375rem); /* Более сильное размытие (150px) */
+}
+
+/* Ellipse 21 */
+.ellipse-21 {
+  width: 12.5rem; /* 200px */
+  height: 12.5rem; /* 200px */
+  left: 76.11%;
+  top: 3.52%;
+  background: #5141da; /* Более яркий цвет */
+  filter: blur(9.375rem); /* Более сильное размытие (150px) */
+}
+
+/* Ellipse 24 */
+.ellipse-24 {
+  width: 12.5rem; /* 200px */
+  height: 12.5rem; /* 200px */
+  left: -9.65%;
+  top: 3.14%;
+  background: rgba(29, 78, 216, 0.65); /* Увеличена прозрачность */
+  filter: blur(9.375rem); /* Более сильное размытие (150px) */
+}
+
+/* Ellipse 22 */
+.ellipse-22 {
+  width: 12.5rem; /* 200px */
+  height: 12.5rem; /* 200px */
+  left: 57.57%;
+  top: 4.24%;
+  background: #d946ef; /* Более яркий цвет */
+  filter: blur(9.375rem); /* Более сильное размытие (150px) */
+}
+
+@media (max-width: 58.125rem) {
+}

@@ -122,7 +122,7 @@ body {
 /**
   Приводим к единому цвету svg-элементы
  */
-svg *[fill] {
+svg *[fill]:not([fill^="url(#")]) {
   fill: currentColor;
 }
 svg *[stroke] {
@@ -153,6 +153,7 @@ svg * {
 
 :root {
   --color-dark-blue: #111827;
+  /* --color-dark-blue: rgb(0, 0, 0); */
   --color-gradient: linear-gradient(166.77deg, #2f79cb -29%, #af51c5 141.21%);
   --color-light-white: #f9fafb;
   --color-white: #ffffff;
@@ -197,11 +198,11 @@ body {
 
 .container {
   /* max-width: 77rem; */
-  max-width: clamp(77rem, 90vw, 77rem);
+  max-width: min(95vw, 77rem);
   margin-left: auto;
   margin-right: auto;
   /* padding: 0.1rem 40px; */
-  padding: 0.1em clamp(10px, 5vw, 40px);
+  padding: 0.1em clamp(10px, 2vw, 40px);
 }
 
 .nav-menu {
@@ -277,6 +278,11 @@ body {
   filter: blur(106.597px);
 }
 
+.main {
+  position: relative;
+  bottom: 60px;
+}
+
 .hero-container {
   width: 100%;
   position: relative;
@@ -285,7 +291,6 @@ body {
 
 .hero {
   position: relative;
-  top: -50px;
   width: 100%;
   max-width: 100%;
   display: grid;
@@ -332,7 +337,7 @@ body {
 
 .hero-button {
   border-radius: 0.38rem;
-  padding: clamp(0.8rem, 1.46vw, 1.25rem) clamp(1.5rem, 2.93vw, 2.5rem);
+  padding: clamp(0.8rem, 1.46vw, 1.25rem) clamp(1.6rem, 2.93vw, 2.5rem);
 }
 
 .watch-video {
@@ -351,7 +356,110 @@ body {
   font-size: clamp(0.8rem, 1.17vw, 1rem);
 }
 
-@media (max-width: 740px) {
+/* Blur */
+.blur-service {
+  position: absolute;
+  width: 1241.6px;
+  height: 432px;
+  left: 183.47px;
+  top: 1032.53px;
+}
+
+.service {
+  text-align: center;
+  color: var(--color-white);
+  margin-top: 30px;
+  overflow: auto;
+}
+
+.service-card-container {
+  margin-top: 38px;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 22px 18px 0px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(
+    267.61deg,
+    rgba(254, 254, 255, 0.03) -10.891%,
+    rgba(255, 255, 255, 0.02) 104.767%
+  );
+  border-radius: 2.25rem;
+  padding: 38px 24px 7px 24px;
+}
+
+.service-h1 {
+  font-size: 2.55rem;
+}
+
+.service-info {
+  padding-top: 25px;
+  display: block;
+  max-width: 580px;
+  margin: 0 auto;
+  font-weight: 250;
+  font-size: 0.99rem;
+  line-height: 162%;
+}
+
+.service-card-icon {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.service-card-icon svg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+.service-bc-svg {
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  z-index: 1;
+}
+
+.service-face-svg {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  transform: translate(-52%, -50%);
+  z-index: 2;
+}
+
+.service-card h3 {
+  font-weight: 400;
+  font-size: 1.48rem;
+  margin: 15px 0;
+}
+
+.service-card p {
+  font-weight: 270;
+  font-size: 0.98rem;
+  line-height: 150%;
+  text-align: justify;
+}
+
+.service-card-more {
+  display: flex;
+}
+
+@media (max-width: 730px) {
+  .main {
+    bottom: 0;
+  }
+
   .nav-menu {
     margin-top: 0;
     justify-content: space-between;
@@ -373,13 +481,15 @@ body {
     backdrop-filter: blur(0.6rem);
     box-shadow: -5px 0 5px rgba(0, 0, 0, 0.25);
 
-    transition: 0.2s;
+    transition: right 0.3s ease-out;
   }
 
   .nav-menu-item {
     box-sizing: border-box;
     height: auto;
     width: 100%;
+    border-bottom: 1px solid linear-gradient(88deg, #2563eb 0%, #d946ef 50%);
+    border-width: 90%;
     padding: 20px 30px;
     justify-content: flex-start;
     font-size: 17px;
@@ -415,5 +525,29 @@ body {
 
   .hero {
     top: 0;
+    grid-template-columns: 1fr;
+    top: -22px;
+    text-align: center;
+  }
+
+  .hero-image-container {
+    order: -1;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .hero-image {
+    scale: 120%;
+  }
+
+  .row {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .hero-button {
+    padding: 0.8rem 2.2rem;
   }
 }

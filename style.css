@@ -188,6 +188,7 @@ a {
   color: inherit;
   border-radius: var(--button-border-radius);
   border: none;
+  cursor: pointer;
 }
 
 body {
@@ -372,6 +373,7 @@ body {
 
   .card-container {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    padding-bottom: 15px;
   }
 
   .card {
@@ -434,6 +436,14 @@ body {
     rgba(255, 255, 255, 0.02) 104.767%
   );
   border-radius: 2.25rem;
+  transition: 0.15s;
+}
+
+.card-container {
+  .card:hover {
+    cursor: pointer;
+    scale: 110%;
+  }
 }
 
 .section-h1 {
@@ -471,7 +481,7 @@ body {
 }
 
 .info {
-  margin-top: 70px;
+  margin-top: 58px;
   color: var(--color-white);
 
   .info-1 {
@@ -734,32 +744,57 @@ body {
   display: flex;
   color: var(--color-white);
 
-  .section-p {
-    padding-top: 15px;
-    line-height: 200%;
+  .left {
+    .section-p {
+      padding-top: 15px;
+      line-height: 200%;
 
-    .footer-info {
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
+      .footer-info {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
 
-      p {
-        margin-left: 7px;
+        p {
+          margin-left: 7px;
+        }
+      }
+
+      .footer-info:first-child {
+        margin-top: 0;
+      }
+
+      .footer-info:last-child {
+        margin-top: 17px;
+        justify-content: space-between;
+
+        svg {
+          width: 30px;
+          height: 30px;
+        }
       }
     }
+  }
 
-    .footer-info:first-child {
-      margin-top: 0;
+  .right {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    padding-left: 13%;
+    /* margin-left: auto; */
+    font-weight: 300;
+    font-size: 1.12rem;
+    line-height: 222%;
+    letter-spacing: 0.01em;
+    /* text-align: right; */
+    white-space: nowrap;
+
+    .right-column {
+      flex: 1;
+      margin-left: auto;
     }
 
-    .footer-info:last-child {
-      margin-top: 17px;
-      justify-content: space-between;
-
-      svg {
-        width: 30px;
-        height: 30px;
-      }
+    .right-column:not(:first-child) {
+      padding-left: 7%;
     }
   }
 }
